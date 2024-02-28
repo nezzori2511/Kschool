@@ -1,0 +1,463 @@
+<div class="main-content">
+  <div class="container-fluid">
+    
+
+
+    <form class="form-add" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+      
+          <!-- <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar [style.background-image]="'url(' + courseForm.get('image').value + ')'" class="example-header-image">   
+              
+              </div>
+              <mat-card-title>Thông tin khóa học</mat-card-title>
+              
+            </mat-card-header>
+         
+          
+            <mat-card-content>
+              <mat-form-field >
+                <mat-label>Tên Khóa Học</mat-label>
+                <input hidden matInput id="courseName"  formControlName="course_id">
+                <input matInput id="courseName"  formControlName="courseName">
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Mô tả</mat-label>
+                <input matInput id="describe" formControlName="describe">
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Giá</mat-label>
+                <input matInput id="price" formControlName="price">
+              </mat-form-field>
+              <label >Thay ảnh </label>
+              <mat-form-field >
+                
+              <input  type="file" matInput id="image"  (change)="OnImageChange($event)" >
+             
+              </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+              <button  mat-button  type="submit">Save</button>
+            </mat-card-actions>
+          </mat-card> -->
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title-group>
+                <mat-card-title>Thông tin khóa học</mat-card-title>
+                <mat-card-subtitle>Nội dung</mat-card-subtitle>
+                <img mat-card-lg-image style="margin-left: 77px;" src="{{courseForm.get('image').value}}" >
+              </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-form-field >
+                <mat-label>Tên Khóa Học</mat-label>
+                <input hidden matInput id="courseName"  formControlName="course_id">
+                <input matInput id="courseName"  formControlName="courseName">
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Mô tả</mat-label>
+                <textarea  matInput id="describe" formControlName="describe" ></textarea>
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Giá</mat-label>
+                <input type="number" matInput id="price" formControlName="price">
+              </mat-form-field>
+              <label >Thay ảnh </label>
+              <mat-form-field >
+                
+              <input  type="file" matInput id="image"  (change)="OnImageChange($event)" >
+             
+              </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+              <button  mat-button  type="submit">Save</button>
+            </mat-card-actions>
+            
+          </mat-card>
+          
+    </form>   
+        
+          
+            
+            <div class="chapter" *ngFor="let chapter of listchapter">
+             
+              <mat-expansion-panel hideToggle class="content-chapter">
+              
+                <mat-expansion-panel-header >
+                 
+                  <mat-panel-title >
+                  
+                    Chương {{chapter.numerical_order}} : {{chapter.chapter_name}}
+                    
+                    <div class="header-buttons">
+                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" (click)="onAddLesson($event,chapter)" (click)="openDialogAddLesson(dialogTemplateaddlesson)"  class="btn btn-primary btn-link btn-sm btn-just-icon">
+                        <i class="material-icons">add</i>
+                    </button>
+                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" (click)="EditChapter($event,chapter)" (click)="openDialog(dialogTemplateeditchapter)"  class="btn btn-primary btn-link btn-sm btn-just-icon">
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" (click)="onDeleteChapter($event,chapter)" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                        <i class="material-icons">close</i>
+                    </button>
+                    </div>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    
+                  </mat-panel-description>
+                
+                </mat-expansion-panel-header>
+
+                  <div *ngFor="let lesson of listLesson">
+                    <div  *ngIf="lesson.chapter_id==chapter.chapter_id">
+                      <div class="lesson-wrapper" >
+                      
+                        <!-- <div class="title-lesson">
+                          <mat-label>Bài {{lesson.stt_lesson}} {{lesson.lesson_name}}</mat-label>
+                      
+                        </div> -->
+                      
+                      
+                      
+                        
+                      <div *ngIf="lesson.type_lesson === 'quiz'" >
+                        <div *ngFor="let exercise of Listexercise">
+                          <div *ngIf="exercise.lesson_id==lesson.lesson_id">
+                          <!-- <span class="lesson-number"> Bài {{lesson.stt_lesson }} Bài tập trắc nghiệm</span>
+                          <span class="lesson-number"> Câu hỏi {{ exercise.question}} </span> -->
+                          <mat-list *ngIf="exercise.answer_1==exercise.correct_answer" role="list">
+                              <mat-list-item style="font-size: 20px;" >Bài {{lesson.stt_lesson }} Bài tập trắc nghiệm</mat-list-item>
+                              <mat-list-item style="font-size: 15px;" > {{exercise.question }} ? </mat-list-item>
+                              <mat-list-item style="background-color: chartreuse;" role="listitem"> a. {{exercise.answer_1}}
+                              </mat-list-item>
+                              <mat-list-item role="listitem"> b. {{exercise.answer_2}}</mat-list-item>
+                              <mat-list-item role="listitem"> c. {{exercise.answer_3}}</mat-list-item>
+                              <mat-list-item role="listitem"> d. {{exercise.answer_4}}</mat-list-item>
+                           </mat-list>
+
+                           <mat-list *ngIf="exercise.answer_2==exercise.correct_answer" role="list">
+                             
+                              <mat-list-item style="font-size: 20px;" >Bài {{lesson.stt_lesson }} Bài tập trắc nghiệm</mat-list-item>
+                              <mat-list-item style="font-size: 15px;" > {{exercise.question }} ? </mat-list-item>
+                              <mat-list-item role="listitem"> a. {{exercise.answer_1}}</mat-list-item>
+                              <mat-list-item style="background-color: chartreuse;" role="listitem"> b. {{exercise.answer_2}}
+                              </mat-list-item>
+                              <mat-list-item role="listitem"> c. {{exercise.answer_3}}</mat-list-item>
+                              <mat-list-item role="listitem"> d. {{exercise.answer_4}}</mat-list-item>
+                            </mat-list>
+
+                         <mat-list *ngIf="exercise.answer_3==exercise.correct_answer" role="list">
+                            <mat-list-item style="font-size: 20px;" >Bài {{lesson.stt_lesson }} Bài tập trắc nghiệm</mat-list-item>
+                            <mat-list-item style="font-size: 15px;" > {{exercise.question }} ? </mat-list-item>
+                            <mat-list-item role="listitem"> a. {{exercise.answer_1}}</mat-list-item>
+                            <mat-list-item role="listitem"> b. {{exercise.answer_2}}</mat-list-item>
+                          
+                            <mat-list-item style="background-color: chartreuse;" role="listitem"> c. {{exercise.answer_3}}
+                            </mat-list-item>
+                            <mat-list-item role="listitem"> d. {{exercise.answer_4}}</mat-list-item>
+                            </mat-list>
+
+                          <mat-list *ngIf="exercise.answer_4==exercise.correct_answer" role="list">
+                             
+                            <mat-list-item style="font-size: 20px;" >Bài {{lesson.stt_lesson }} Bài tập trắc nghiệm</mat-list-item>
+                            <mat-list-item style="font-size: 15px;" > {{exercise.question }} ? </mat-list-item>
+                            <mat-list-item role="listitem"> a. {{exercise.answer_1}}</mat-list-item>
+                            <mat-list-item role="listitem"> b. {{exercise.answer_2}}</mat-list-item>
+                            <mat-list-item role="listitem"> c. {{exercise.answer_3}}</mat-list-item>
+                            <mat-list-item style="background-color: chartreuse;" role="listitem"> d. {{exercise.answer_4}}
+                            </mat-list-item>
+                          </mat-list>
+                          <button mat-raised-button color="primary" type="button" (click)="editlessonexercise(exercise)" (click)="openDialogAddLesson(dialogTemplateeditlessonexercise)">Sửa bài học</button>
+                          <button mat-raised-button color="warn" type="button" (click)="removeLesson(lesson)">Xóa bài học</button>
+                        </div>
+                        
+                        </div>
+                      </div>
+
+                      <div *ngIf="lesson.type_lesson === 'video'">
+                        <div *ngFor="let listvideo of Listvideolesson">
+                          <div *ngIf="listvideo.lesson_id==lesson.lesson_id">
+                            <mat-list role="list">
+                              <mat-list-item style="font-size: 20px;" role="listitem"> Bài  {{lesson.stt_lesson }} : {{lesson.lesson_name}}</mat-list-item>
+                             
+                             
+                            </mat-list>
+                            <video style="width: 100%; height: 80%;padding: 20px;" [src]="listvideo.link_video" controls></video>
+
+                           
+                            <!-- <mat-form-field >
+                              <mat-label> Tên Bài Học</mat-label>
+                              <input matInput id="lessonName" value="{{lesson.lesson_name}}">
+                              <br>
+                              <br>
+                              
+                              
+              
+                            </mat-form-field> -->
+                            
+                            <button mat-raised-button color="primary" type="button" (click)="editlessonvideo(listvideo)" (click)="openDialogAddLesson(dialogTemplateeditvideolesson)">Sửa bài học</button>
+                            <button mat-raised-button color="warn" type="button" (click)="removeLesson(lesson)">Xóa bài học</button>
+                          </div>
+                          
+                      </div>
+                      
+                      
+                        
+                 
+                      </div>
+                         
+                    
+                      </div>
+                     
+                      
+                    </div>
+                   
+                    
+                    
+                    
+                   
+                
+                   
+                   
+                    
+               
+                  </div> 
+                  
+        
+              </mat-expansion-panel>
+            </div>
+            
+            <div class="button-add-chapter">
+              <form (ngSubmit)="onSubmitAddChapter()" [formGroup]="chapteraddForm">
+                <mat-list role="list">
+                  <mat-list-item role="listitem"><span>Thêm chương</span></mat-list-item>
+                  <mat-list-item role="listitem"><mat-form-field class="chapter-input">
+                    <mat-label>Tên chương</mat-label>
+                    <input matInput id="chapter_name" formControlName="chapter_name">
+                  </mat-form-field></mat-list-item>
+                  <mat-list-item role="listitem"> 
+                    <button style="width: 100%;"  mat-raised-button type="submit">
+                      <i class="material-icons">add</i>
+                    </button>
+                </mat-list-item>
+                </mat-list>
+                
+                
+               
+              </form>
+            </div>
+         
+            
+            
+            
+            
+            
+            
+         
+          
+   
+       
+      
+         
+            <ng-template #dialogTemplateeditchapter>
+              <mat-card  >
+              <form [formGroup]="editchapterForm" (ngSubmit)="onEditChapter()">
+                <h2 style="text-align: center;">Sửa thông tin chương </h2>
+                <mat-form-field    >
+                  <mat-label>Tên chương</mat-label>
+                  <input matInput type="hidden"  formControlName="chapter_id" >
+                  <input matInput formControlName="chapter_name" >
+                </mat-form-field>
+               
+                
+                <div class="edit-form-buttons">
+                  <button mat-raised-button color="primary" type="submit">Save</button>
+                  <button mat-button color="warn" (click)="cancelEditForm()">Cancel</button>
+                </div>
+                
+              </form>
+            </mat-card>
+          </ng-template>
+
+        
+          <ng-template #dialogTemplateaddlesson>
+            <mat-tab-group>
+              <mat-tab label="Bài tập">   
+                <mat-card  >
+                <form [formGroup]="addexerciselessonForm" (ngSubmit)="OnAddExercise()">
+                  <h2 style="text-align: center;">Thêm bài tập </h2>
+                  <mat-form-field    >
+                    <!-- <input matInput   formControlName="chapter_id" > -->
+                    <mat-label>Câu hỏi</mat-label>
+                    <input matInput formControlName="question" >
+                  </mat-form-field>
+                  <mat-radio-group class="answer-group" formControlName="correct_answer">
+                    <mat-list role="list">
+                      <mat-list-item role="listitem">
+                        <mat-radio-button value="1">
+                          <mat-form-field>
+                            
+                            <mat-label> Đáp án 1</mat-label>
+                            <input matInput id="answer_1" formControlName="answer_1">
+                          </mat-form-field>
+                        </mat-radio-button>
+                      </mat-list-item>
+                      <mat-list-item role="listitem">
+                        <mat-radio-button value="2">
+                          <mat-form-field>
+                            <mat-label> Đáp án 2</mat-label>
+                            <input matInput id="answer_2" formControlName="answer_2">
+                          </mat-form-field>
+                        </mat-radio-button>
+                      </mat-list-item>
+                      <mat-list-item role="listitem">
+                        <mat-radio-button value="3">
+                          <mat-form-field>
+                            <mat-label> Đáp án 3</mat-label>
+                            <input matInput id="answer_3" formControlName="answer_3">
+                          </mat-form-field>
+                        </mat-radio-button>
+                      </mat-list-item>
+                      <mat-list-item role="listitem">
+                        <mat-radio-button value="4">
+                          <mat-form-field>
+                            <mat-label>Đáp án 4</mat-label>
+                            <input matInput id="answer_4" formControlName="answer_4">
+                          </mat-form-field>
+                        </mat-radio-button>
+                      </mat-list-item>
+                    </mat-list>
+                   
+                    
+                    
+                   
+                  </mat-radio-group>
+                  
+                  
+
+                  <div class="edit-form-buttons">
+                    <button mat-raised-button color="primary" type="submit">Save</button>
+                    <button mat-button color="warn" (click)=" cancelAddFormLesson()" >Cancel</button>
+                  </div>
+                  
+                </form>
+              </mat-card> 
+            </mat-tab>
+              <mat-tab label="Video"> 
+                 <mat-card  >
+                <form [formGroup]="addvideolessonForm" (ngSubmit)="OnAddVideoLesson()">
+                  <h2 style="text-align: center;">Thêm bài học video  </h2>
+                  <mat-form-field >
+                    <!-- <input hidden matInput id="lessonName" formControlName="chapter_id"> -->
+                    <mat-label> Tên Bài Học</mat-label>
+                    <input matInput id="lessonName" formControlName="lesson_name">
+                    <br>
+                    <br>
+                    <input class="file-upload" type="file" matInput id="videoFile"  (change)="onVideoChange($event)">
+                    
+    
+                  </mat-form-field>
+                  <div class="edit-form-buttons">
+                    <button mat-raised-button color="primary" type="submit">Save</button>
+                    <button mat-button color="warn" (click)=" cancelAddFormLesson()">Cancel</button>
+                  </div>
+                  
+                </form>
+              </mat-card> 
+            </mat-tab>
+              
+            </mat-tab-group>
+            
+          
+        </ng-template>
+       
+        <ng-template #dialogTemplateeditvideolesson>
+        
+            <mat-card  >
+           <form [formGroup]="editvideolessonForm" (ngSubmit)="OnEditVideoLesson()">
+             <h2 style="text-align: center;">Sửa bài học video  </h2>
+             <mat-form-field >
+               <!-- <input hidden matInput id="lessonName" formControlName="chapter_id"> -->
+               <mat-label> Tên Bài Học</mat-label>
+               <!-- <input matInput hidden  formControlName="link_video">
+               <input matInput hidden  formControlName="video_lesson_id"> -->
+               <input matInput formControlName="lesson_name">
+               <br>
+               <br>
+               <input class="file-upload" type="file" matInput   (change)="onVideoChange($event)">
+               
+
+             </mat-form-field>
+             <div class="edit-form-buttons">
+               <button mat-raised-button color="primary" type="submit">Save</button>
+               <button mat-button color="warn" (click)=" cancelEditLessonForm()">Cancel</button>
+             </div>
+             
+           </form>
+         </mat-card> 
+      
+      </ng-template>
+
+      <ng-template #dialogTemplateeditlessonexercise>
+        <mat-card  >
+          <form [formGroup]="editexerciselessonForm" (ngSubmit)="OnEditExerciseLesson()">
+            <h2 style="text-align: center;">Sửa bài tập </h2>
+            <mat-form-field    >
+              <input matInput hidden  formControlName="exercise_id" >
+              <mat-label>Câu hỏi</mat-label>
+              <input matInput formControlName="question" >
+            </mat-form-field>
+            <mat-radio-group class="answer-group" formControlName="correct_answer">
+              <mat-list role="list">
+                <mat-list-item role="listitem">
+                  <mat-radio-button value="1">
+                    <mat-form-field>
+                      
+                      <mat-label> Đáp án 1</mat-label>
+                      <input matInput id="answer_1" formControlName="answer_1">
+                    </mat-form-field>
+                  </mat-radio-button>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                  <mat-radio-button value="2">
+                    <mat-form-field>
+                      <mat-label> Đáp án 2</mat-label>
+                      <input matInput id="answer_2" formControlName="answer_2">
+                    </mat-form-field>
+                  </mat-radio-button>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                  <mat-radio-button value="3">
+                    <mat-form-field>
+                      <mat-label> Đáp án 3</mat-label>
+                      <input matInput id="answer_3" formControlName="answer_3">
+                    </mat-form-field>
+                  </mat-radio-button>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                  <mat-radio-button value="4">
+                    <mat-form-field>
+                      <mat-label>Đáp án 4</mat-label>
+                      <input matInput id="answer_4" formControlName="answer_4">
+                    </mat-form-field>
+                  </mat-radio-button>
+                </mat-list-item>
+              </mat-list>
+             
+              
+              
+             
+            </mat-radio-group>
+            
+            
+
+            <div class="edit-form-buttons">
+              <button mat-raised-button color="primary" type="submit">Save</button>
+              <button mat-button color="warn" (click)=" cancelEditLessonForm()" >Cancel</button>
+            </div>
+            
+          </form>
+        </mat-card> 
+    </ng-template>
+        
+  </div>
+</div>

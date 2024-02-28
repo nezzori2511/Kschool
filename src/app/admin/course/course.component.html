@@ -1,0 +1,333 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Tasks:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link active" href="#profile" data-toggle="tab">
+                                            <i class="material-icons">school</i> Quản lý khai giảng khóa học 
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#messages" data-toggle="tab">
+                                            <i class="material-icons">class</i> Quản lý thông tin khóa học 
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                            <i class="material-icons">sell</i> Quản lý chương trình giảm giá
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="profile">
+                              
+                                
+                                <table #firstsort="matSort" matSort  mat-table [dataSource]="dataSource"  class="table">
+                                    
+                                    <ng-container matColumnDef="course_id">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Id</th>
+                                      <td mat-cell *matCellDef="let courses"> {{courses.course_id}} </td>
+                                    </ng-container>
+                                
+                                
+                                    <ng-container matColumnDef="name">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
+                                      <td mat-cell *matCellDef="let courses"> {{courses.name}} </td>
+                                    </ng-container>
+                                
+                                    
+                                   
+                                    
+                                    
+                                    <ng-container matColumnDef="specialized_name">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Lĩnh vực </th>
+                                      <td mat-cell *matCellDef="let courses"> {{courses.specialized_name}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="status">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Tình trạng </th>
+                                        
+                                        <td mat-cell *matCellDef="let courses" >
+                                            <div *ngIf="courses.status==true">
+                                                Đã duyệt
+                                            </div>
+                                            <div *ngIf="courses.status!=true">
+                                                Chưa duyệt
+                                            </div>
+                                        </td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="scheduled">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef>Tình trạng lên lịch </th>
+                                        
+                                        <td mat-cell *matCellDef="let courses" >
+                                            <div *ngIf="courses.scheduled==true">
+                                                Đã lên lịch
+                                            </div>
+                                            <div *ngIf="courses.scheduled!=true">
+                                                Chưa lên lịch
+                                            </div>
+                                        </td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="registration_opening">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Ngày mở đăng ký</th>
+                                        <td mat-cell *matCellDef="let courses"> {{courses.registration_opening | date:'dd-MM-yyyy'}} </td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="registration_close">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Ngày đóng đăng ký</th>
+                                        <td mat-cell *matCellDef="let courses"> {{courses.registration_close | date:'dd-MM-yyyy'}} </td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="time_start_course">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Thời gian bắt đầu khóa học</th>
+                                        <td mat-cell *matCellDef="let courses"> {{courses.time_start_course | date:'dd-MM-yyyy'}} </td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="empty_slot">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Số lượng</th>
+                                        <td mat-cell *matCellDef="let courses"> {{courses.empty_slot}}/{{courses.total_slot}} </td>
+                                      </ng-container>
+                                    <ng-container matColumnDef="actions">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef>Actions</th>
+                                      <td mat-cell *matCellDef="let courses">
+                                        <div *ngIf="courses.scheduled==false">
+                                            <button mat-raised-button type="button" (click)="gan_bien(courses) " (click)="openDialog(dialogTemplateaddschedule)"   >
+                                                Lên lịch
+                                            </button>
+                                        </div>
+                                        
+                                        <div *ngIf="courses.scheduled==true">
+                                            <button mat-raised-button type="button" (click)="deleteschedule(courses)"    >
+                                                Xóa lịch
+                                            </button>
+                                        </div>
+                                        <div *ngIf="courses.status==true && courses.scheduled==true">
+                                          <button mat-raised-button type="button" (click)="confirm_delete_class(courses)"   >
+                                            Hủy lớp
+                                          </button>
+                                          
+                                      </div>
+                                      <div *ngIf="courses.status!=true && courses.scheduled==true">
+                                        <button mat-raised-button type="button"  (click)="phan_cong_gv(courses)"  (click)="confirm_add_class(courses)"    >
+                                      
+                                          Xác nhận mở lớp 
+                                        </button>
+                                    </div>
+                                      
+                                      </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsCourseOpenning"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsCourseOpenning;"></tr>
+                                      </table>
+                                <mat-paginator #firstPaginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                            </div>
+                            <div class="tab-pane" id="messages">
+                                <!-- <div class="example-header">
+                                    <mat-form-field class="search-input">
+                                      <input matInput  placeholder="Search">
+                                    </mat-form-field>
+                                    <mat-form-field class="search-input">
+                                      <mat-select  placeholder="Role">
+                                        <mat-option  [value]=0 >
+                                          All
+                                        </mat-option>
+                                       
+                                      </mat-select>
+                                    </mat-form-field>
+                                   
+                                  </div> -->
+                                  <button mat-raised-button type="button" routerLink="/admin/addcourse" >
+                                    Thêm khóa học 
+                                 </button>
+                                <table #secondsort="matSort"  matSort mat-table [dataSource]="datacourseinfor"  class="table">
+                                    
+                              <ng-container matColumnDef="course_id">
+                                <th mat-sort-header mat-header-cell *matHeaderCellDef> Id</th>
+                                <td mat-cell *matCellDef="let courses"> {{courses.course_id}} </td>
+                              </ng-container>
+                          
+                          
+                              <ng-container matColumnDef="name">
+                                <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
+                                <td mat-cell *matCellDef="let courses"> {{courses.name}} </td>
+                              </ng-container>
+                              
+                              <ng-container matColumnDef="describe">
+                                <th mat-sort-header mat-header-cell *matHeaderCellDef> Describe </th>
+                                <td mat-cell *matCellDef="let courses"> {{courses.describe}} </td>
+
+                                <ng-container matColumnDef="created_at">
+                                  <th mat-sort-header mat-header-cell *matHeaderCellDef> Created_at </th>
+                                  <td mat-cell *matCellDef="let courses"> {{courses.created_at | date:'dd-MM-yyyy'}} </td>
+                                </ng-container>
+                              </ng-container>
+                              
+                              <ng-container matColumnDef="updated_at">
+                                <th mat-sort-header mat-header-cell *matHeaderCellDef>Updated_at </th>
+                                <td mat-cell *matCellDef="let courses"> {{courses.updated_at | date:'dd-MM-yyyy'}} </td>
+                              </ng-container>
+                          
+                              
+                              <ng-container matColumnDef="price">
+                                <th mat-sort-header mat-header-cell *matHeaderCellDef> Price </th>
+                                <td mat-cell *matCellDef="let courses"> {{courses.price| number:'1.0-0'}}VNĐ</td>
+                              </ng-container>
+                              <ng-container matColumnDef="specialized_name">
+                                <th mat-sort-header mat-header-cell *matHeaderCellDef> Lĩnh vực </th>
+                                <td mat-cell *matCellDef="let courses"> {{courses.specialized_name}} </td>
+                              </ng-container>
+                             
+                              <ng-container matColumnDef="actions">
+                                <th mat-sort-header mat-header-cell *matHeaderCellDef>Actions</th>
+                                <td mat-cell *matCellDef="let courses">
+                                 
+                                <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="edit(courses.course_id)"  >
+                                  <i class="material-icons">edit</i>
+                                </button>
+                                <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon"   (click)="delete(courses.course_id)">
+                                    <i class="material-icons">close</i>
+                                </button>
+                                
+                                </td>
+                              </ng-container>
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                                <mat-paginator #secondPaginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                            </div>
+                            <div class="tab-pane" id="settings">
+                                <table #thirdsort="matSort" matSort mat-table [dataSource]="datacoursepromotion"  class="table">
+                                    
+                                    <ng-container matColumnDef="course_id">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Id</th>
+                                      <td mat-cell *matCellDef="let courses"> {{courses.course_id}} </td>
+                                    </ng-container>
+                                
+                                
+                                    <ng-container matColumnDef="name">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Tên khóa học </th>
+                                      <td mat-cell *matCellDef="let courses"> {{courses.name}} </td>
+                                    </ng-container>
+                                    
+                                    <ng-container matColumnDef="price">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Giá </th>
+                                        <td mat-cell *matCellDef="let courses"> {{courses.price | number:'1.0-0'}} VNĐ </td>
+                                      </ng-container>
+                                 
+                                      <ng-container matColumnDef="price_discount">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Phần trăm giảm giá </th>
+                                        <td mat-cell *matCellDef="let courses"> {{courses.price_discount}} %</td>
+                                      </ng-container>
+                                     
+                                      <ng-container matColumnDef="price_affter_promotion">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Giá sao khi áp dụng giảm giá </th>
+                                        <td mat-cell *matCellDef="let courses"> {{courses.price-(courses.price*( courses.price_discount /100))|number:'1.0-0'}} VNĐ</td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="promotion">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Tình trạng giảm giá  </th>
+                                        <td mat-cell *matCellDef="let courses">
+                                            <div *ngIf="courses.promotion==true">
+                                                Đang giảm giá 
+                                            </div>
+                                            <div *ngIf="courses.promotion!=true">
+                                                Không có giảm giá
+                                            </div>
+                                        </td>
+                                      </ng-container>
+                                   
+                                   
+                                    <ng-container matColumnDef="actions">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef>Actions</th>
+                                      <td mat-cell *matCellDef="let courses">
+                                        <div *ngIf="courses.promotion==false">
+                                          <button mat-raised-button type="button" (click)="edit_promotion(courses)" (click)="openDialog(dialogTemplatePromotion)"  >
+                                              Áp dụng giảm giá 
+                                          </button>
+                                        </div>
+                                        <div *ngIf="courses.promotion!=false">
+                                          <button mat-raised-button type="button" (click)="remove_promotion(courses)"   >
+                                              Gỡ giảm giá
+                                          </button>
+                                        </div>
+                                      </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnspromotion"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnspromotion;"></tr>
+                                      </table>
+                                      <mat-paginator #thirdPaginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    
+    </div>
+</div>
+<ng-template #dialogTemplateaddschedule>
+    <mat-card  >
+    <form [formGroup]="add_schedule_form" >
+      <h2 style="text-align: center;">Thêm lịch học </h2>
+ 
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label>Tổng số buổi dạy </mat-label>
+        <input matInput   formControlName="total_day" required>
+        
+        
+        
+      </mat-form-field>
+      <mat-form-field floatLabel="always"  >
+        <mat-label>Tiền  giảng viên </mat-label>
+        
+        <input matInput formControlName="hourly_rate" type="number" class="example-right-align" >
+        
+ 
+      </mat-form-field>
+      <mat-form-field floatLabel="always"  >
+        <mat-label>Khoảng cách giữa các buổi dạy </mat-label>
+        
+        <input matInput formControlName="space_day" type="text" class="example-right-align" >
+        
+ 
+      </mat-form-field>
+      
+      <div class="edit-form-buttons">
+        <button mat-raised-button color="primary" type="submit" (click)=" add_schedule()"  >Save</button>
+        <button mat-button color="warn" (click)="cancelAddScheduleForm()">Cancel</button>
+      </div>
+      
+    </form>
+  </mat-card>
+</ng-template>
+
+<ng-template #dialogTemplatePromotion>
+  <mat-card  >
+  <form [formGroup]="promotion_form" >
+    <h2 style="text-align: center;">Thêm lịch học </h2>
+
+    <mat-form-field  class="edit-form-field" appearance="fill">
+      <mat-label>Mức giảm giá (%) </mat-label>
+      <input matInput type="number"   formControlName="rate_promotion" required>
+      
+      
+      
+    </mat-form-field>
+   
+    <div class="edit-form-buttons">
+      <button mat-raised-button color="primary" type="submit"  (click)="sub_promotion()" >Save</button>
+      <button mat-button color="warn" (click)="cancelPromotionForm()" >Cancel</button>
+    </div>
+    
+  </form>
+</mat-card>
+</ng-template>

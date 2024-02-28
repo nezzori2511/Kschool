@@ -1,0 +1,32 @@
+<!-- login.component.html -->
+
+    
+    <div class="row  justify-content-center" style="padding-top: 100px;">
+        <div class="col-md-6 ">
+     
+           
+                    <div class="card">
+                        <div class="text-center">
+                            <h1>Login</h1>
+                            <h6>Vui lòng điền username và password !!</h6>
+                        </div>
+                        <form [formGroup]="loginForm" (submit)="onSubmitLogin()" >
+                            
+                                <div class="mb-3">
+                                    <label for="Mail" class="form-label">Email Address</label>
+                                    <input formControlName="username" style="color: aliceblue;" type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Password" class="form-label">Password</label>
+                                    <input formControlName="password" style="color: aliceblue;" type="password" class="form-control" id="exampleInputPassword1">
+                                
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            
+                        </form>
+                    </div>
+            
+          
+        </div>
+    </div>

@@ -1,0 +1,84 @@
+<!-- login.component.html -->
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-6 ">
+            <mat-tab-group class="mat-tab-form">
+                <mat-tab label="Login" >
+                    <div class="card">
+                        <div class="text-center">
+                            <h1>Login</h1>
+                            <h6>Vui lòng điền username và password !!</h6>
+                        </div>
+                        <form [formGroup]="loginForm" (submit)="onSubmitLogin()" >
+                            
+                                <div class="mb-3">
+                                    <label for="Mail" class="form-label">Email Address</label>
+                                    <input formControlName="username" style="color:black;" type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Password" class="form-label">Password</label>
+                                    <input formControlName="password" style="color:black;" type="password" class="form-control" id="exampleInputPassword1">
+                                
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            
+                        </form>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Register">
+                    <div class="card">
+                        <div class="text-center">
+                            <h1 >Register</h1>
+                            <h6 >Vui lòng điền đầy đủ thông tin !!</h6>
+                        </div>
+                        <form [formGroup]="resForm" (submit)="onSubmitRes()">
+                            
+                            <div class="mb-3">
+                                <label for="Mail" class="form-label">First name</label>
+                                <input formControlName="first_name" style="color:black;"  type="text" class="form-control" id="exampleInputEmail" >
+                                <!-- <div id="emailHelp" class="form-text"></div> -->
+                            </div>
+                            <div class="mb-3">
+                                <label for="Mail" class="form-label">Last name</label>
+                                <input formControlName="last_name" style="color:black;"  type="text" class="form-control" id="exampleInputEmail" >
+                                <!-- <div id="emailHelp" class="form-text"></div> -->
+                            </div>
+                            <div class="mb-3">
+                                <label for="Password" class="form-label">NumberPhone</label>
+                                <input formControlName="phone_number" style="color:black;" type="text" class="form-control" id="exampleInputPassword2">
+                            
+                            </div>
+                            <div class="mb-3">
+                                <label for="Password" class="form-label">Email</label>
+                                <input formControlName="email" style="color:black;" type="email" class="form-control" id="exampleInputPassword2">
+                            
+                            </div>
+                            <div class="mb-3">
+                                <label for="Mail" class="form-label">User name</label>
+                                <input formControlName="username" style="color:black;"  type="text" class="form-control" id="exampleInputEmail" >
+                                <!-- <div id="emailHelp" class="form-text"></div> -->
+                            </div>
+                                <div class="mb-3">
+                                    <label for="Password" class="form-label">Password</label>
+                                    <input formControlName="password" style="color:black;" type="password" class="form-control">
+                                
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Password" class="form-label">Password</label>
+                                    <input formControlName="password2" style="color:black;" type="password" class="form-control" >
+                                
+                                </div>
+                              
+                               
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            
+                        </form>
+                    </div>  
+                </mat-tab>
+            </mat-tab-group>
+          
+        </div>
+    </div>
+</div>

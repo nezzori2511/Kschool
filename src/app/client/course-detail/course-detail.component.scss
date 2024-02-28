@@ -1,0 +1,66 @@
+.content
+{
+    max-width: 2000px ;
+    display: flex;
+    width: 1513px;
+    height: 100%;
+}
+.courses_information
+{
+    // background-color: aqua;
+        // justify-content: center;
+        // align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+.lesson_information
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    // background-color: rgb(87, 94, 100);
+    
+    width: 40%;
+}
+.chapter{
+    width: 80%;
+}
+.lesson-wrapper
+{
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    background-color: #ffffff;
+}
+
+
+.lesson-wrapper:hover {
+    background-color: #e0e0e0; /* Màu nền khi hover */
+  }
+
+  .custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    color: #3498db;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .custom-button:hover {
+    background-color: #3498db;
+    color: #ffffff;
+  }
+
+  .custom-button:active {
+    transform: scale(0.95);
+  }

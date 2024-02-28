@@ -1,0 +1,164 @@
+
+<div class="container my-5">
+    <h1>Danh sách tài khoản</h1>
+    <div class="search-form">
+      <button mat-raised-button color="primary" (click)="openDialog(dialogTemplate)">Thêm tài khoản</button>
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearchForm()" class="search-form">
+        <mat-form-field class="search-form-field">
+          <input matInput placeholder="Tìm kiếm" formControlName="keyword" >
+          <button mat-button *ngIf="searchForm.get('keyword').value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Tìm kiếm</button>
+      </form>
+    </div>
+    
+    <table mat-table [dataSource]="taiKhoanModel" class="mat-elevation-z8" *ngIf="taiKhoanModel">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let taikhoan">{{ taikhoan.id }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="taiKhoan" >
+        <th mat-header-cell *matHeaderCellDef>Tài khoản</th>
+        <td mat-cell *matCellDef="let taikhoan">{{ taikhoan.username }}</td>
+      </ng-container>
+      <ng-container matColumnDef="matKhau" >
+        <th mat-header-cell *matHeaderCellDef  class="mat-password-header">Mật khẩu</th>
+        <td mat-cell *matCellDef="let taikhoan" class="mat-password-cell">{{ taikhoan.password }}</td>
+      </ng-container>
+      <ng-container matColumnDef="roleid">
+        <th mat-header-cell *matHeaderCellDef>RoleId</th>
+        <td mat-cell *matCellDef="let taikhoan">{{ taikhoan.roleid }}</td>
+      </ng-container>
+      <ng-container matColumnDef="namerole">
+        <th mat-header-cell *matHeaderCellDef>Chức vụ</th>
+        <td mat-cell *matCellDef="let taikhoan">{{ taikhoan.namerole }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let taikhoan">
+          <button mat-icon-button color="primary" (click)="edit(taikhoan)" (click)="openDialog(dialogTemplateedit)" >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="delete(taikhoan)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          
+        </td>
+      </ng-container>
+  
+      <!-- Table header -->
+      <tr mat-header-row *matHeaderRowDef="['id','taiKhoan', 'matKhau','roleid','namerole', 'actions']"></tr>
+      <!-- Table row -->
+      <tr mat-row *matRowDef="let row; columns: ['id','taiKhoan', 'matKhau', 'roleid','namerole','actions'];"></tr>
+       
+    </table>
+  
+    <!-- Paginator -->
+    <!-- <mat-paginator [length]="taiKhoanModel?.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
+  
+    <!-- Show a message when there's no data -->
+    <p *ngIf="!taiKhoanModel || taiKhoanModel.length === 0">No data</p>
+  </div>
+  
+    <!-- <button mat-button color="warn" (click)="logout()">Logout</button> -->
+    <ng-template #dialogTemplateedit>
+    <mat-card *ngIf="selectedTaiKhoan" class="edit-form-card">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmitEditForm()">
+        <h2 style="text-align: center;">Sửa thông tin</h2>
+        <mat-form-field  class="edit-form-field"  >
+          <input matInput type="hidden"  formControlName="id" >
+        </mat-form-field>
+        <mat-form-field  class="edit-form-field" appearance="fill">
+          <mat-label>Điền tài khoản</mat-label>
+          <input matInput   formControlName="username" required>
+          
+          
+          <mat-hint>Tài khoản người dùng</mat-hint>
+        </mat-form-field>
+        <!-- <mat-form-field class="edit-form-field">
+          <input matInput placeholder="Mật khẩu" formControlName="password" required>
+        </mat-form-field> -->
+        <!-- <mat-form-field  class="edit-form-field" appearance="fill">
+          <mat-label>Điền tài ID role</mat-label>
+          <input matInput   formControlName="roleid" required>
+        
+          
+          <mat-hint>Id role</mat-hint>
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-label>Chức vụ</mat-label>
+          <mat-select (selectionChange)="onSelectChangeEdit($event)" [formControl]="editForm.get('selectedOption')">
+            <mat-option [value]="null">Chọn chức vụ</mat-option>
+            <ng-container *ngFor="let listRoles of listRole">
+  
+              <mat-option  [value]="listRoles.id" >
+                {{ listRoles.namerole  }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field class="edit-form-field">
+          <input matInput placeholder="RoleId" formControlName="roleid" required>
+        </mat-form-field> -->
+        <div class="edit-form-buttons">
+          <button mat-raised-button color="primary" type="submit">Save</button>
+          <button mat-button color="warn" (click)="cancelEditForm()">Cancel</button>
+        </div>
+        
+      </form>
+    </mat-card>
+  </ng-template>
+    <ng-template #dialogTemplate>
+    <mat-card class="add-form-card">
+      <form [formGroup]="addForm" (ngSubmit)="onSubmitAddForm()">
+        <h2 style="text-align: center;">Thông tài khoản</h2>
+       
+        <mat-form-field  class="edit-form-field" appearance="fill">
+          <mat-label>Điền tài khoản</mat-label>
+          <input matInput   formControlName="username" required>
+          
+          
+          <mat-hint>Tài khoản người dùng</mat-hint>
+        </mat-form-field>
+        <mat-form-field  class="edit-form-field" appearance="fill">
+          <mat-label>Mật khẩu</mat-label>
+          <input matInput   formControlName="password" required>
+          
+          
+          <mat-hint>Mật khẩu</mat-hint>
+        </mat-form-field>
+        <!-- <mat-form-field  class="edit-form-field" appearance="fill">
+          <mat-label>Điền Id role</mat-label>
+          <input matInput   formControlName="roleid" required>
+          
+          
+          <mat-hint>RoleID của người dùng</mat-hint>
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-label>Chức vụ</mat-label>
+          <mat-select (selectionChange)="onSelectChangeAdd($event)" [formControl]="addForm.get('selectedOption')">
+            <mat-option [value]="null">Chọn thành phố</mat-option>
+            <ng-container *ngFor="let listRoles of listRole">
+  
+              <mat-option  [value]="listRoles.id" >
+                {{ listRoles.namerole  }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <div class="edit-form-buttons">
+          <button mat-raised-button color="primary" type="submit">Save</button>
+          <button mat-button color="warn" (click)="cancelAddForm()">Cancel</button>
+        </div>
+      </form>
+    
+   
+    </mat-card>
+    </ng-template>
+    
+  
+  
+    

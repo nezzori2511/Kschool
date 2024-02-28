@@ -1,0 +1,132 @@
+<div class="content">
+    <div class="lesson_information">
+        <div *ngIf="type_lesson=='video'"   style="padding: 20px;" class="information">
+         
+            <video style="width: 100%; height: 80%;border-radius: 20px;" [src]="video_select" controls></video>
+            
+        </div>
+        <div class="form_question"  *ngIf="type_lesson=='quiz'">
+            <form>
+            
+                
+               
+                <!-- <mat-radio-group class="answer-group" >
+                    <mat-radio-button value="1">
+                    
+                        <mat-label> Đáp án 1</mat-label>
+                        {{exercise_lesson.answer_1}}
+                    
+                    </mat-radio-button>
+                    <mat-radio-button value="2">
+                      
+                        <mat-label> Đáp án 2</mat-label>
+                        {{exercise_lesson.answer_2}}
+                      
+                    </mat-radio-button>
+                    <mat-radio-button value="3">
+                     
+                        <mat-label> Đáp án 3</mat-label>
+                        {{exercise_lesson.answer_3}}
+                    
+                    </mat-radio-button>
+                    <mat-radio-button value="4">
+                   
+                        <mat-label>Đáp án 4</mat-label>
+                        {{exercise_lesson.answer_4}}
+                     
+                    </mat-radio-button>
+                  </mat-radio-group> -->
+                  <mat-list  role="list">
+                    <mat-radio-group class="answer-group" >
+                        <mat-list-item style="font-size:25px;" > 
+                           {{exercise_lesson.question }} ?
+                          
+                         </mat-list-item>
+                        <mat-list-item role="listitem">
+                            <mat-radio-button  value="1">
+                               <p style="color: black;">a. {{exercise_lesson.answer_1}}</p> 
+                            </mat-radio-button> 
+                        </mat-list-item>
+                        <mat-list-item  role="listitem"> <mat-radio-button value="2">
+                            <p style="color: black;">b. {{exercise_lesson.answer_2}}</p> 
+                            </mat-radio-button> 
+                        </mat-list-item>
+                        
+                        <mat-list-item  role="listitem"> <mat-radio-button value="3">
+                            <p style="color: black;">c. {{exercise_lesson.answer_3}}</p> 
+                        </mat-radio-button> 
+                        </mat-list-item>
+                        <mat-list-item role="listitem"> <mat-radio-button value="4">
+                            <p style="color: black;">d. {{exercise_lesson.answer_4}}</p> 
+                        </mat-radio-button> </mat-list-item>
+                        <mat-list-item *ngIf="show_exercise==true" style="color: rgb(14, 234, 14);" role="listitem"> 
+                            Đáp án: {{exercise_lesson.correct_answer}}
+                        </mat-list-item>
+
+                  </mat-radio-group>
+                  <div  style="text-align: center;">
+                    <button (click)="check_exercise()"  class="custom-button">Kiểm tra đáp án</button>
+                </div>
+                  </mat-list>
+            </form>
+        
+
+
+               
+        </div>
+        
+    </div>
+    <div  class="courses_information">
+       <div class="information">
+        <h2 ><b>{{course.name}}</b></h2>
+        
+        </div>
+        <div class="content-course">
+            
+            <h3><b>Nội dụng khóa học</b></h3>
+            
+        </div>
+        <div style="padding: 5px;" class="chapter" *ngFor="let chapter of listchapter" >
+             
+            <mat-expansion-panel  style="padding: 5px;" hideToggle class="content-chapter">
+            
+              <mat-expansion-panel-header >
+               
+                <mat-panel-title  style="margin-right: -180px;">
+                
+                  Chương {{chapter.numerical_order}} :{{chapter.chapter_name}}
+                  
+               
+                </mat-panel-title>
+                <mat-panel-description>
+                  
+                </mat-panel-description>
+              
+              </mat-expansion-panel-header>
+
+              <div *ngFor="let lesson of listLesson">
+                <div class="lesson-wrapper" *ngIf="lesson.chapter_id==chapter.chapter_id"  >
+                    <div  *ngIf="lesson.type_lesson=='quiz'" >
+                       <label style="color: black;" (click)="SelectLessonExercise(lesson)" for="">Bài {{lesson.stt_lesson}} :Câu hỏi ôn tập</label> 
+                    </div>
+                    <div *ngIf="lesson.type_lesson!='quiz'">
+                        <label style="color: black;" (click)="SelectLesson(lesson)" for="">Bài {{lesson.stt_lesson}} :{{lesson.lesson_name}}</label>
+                    </div>
+                </div>
+                
+               
+            
+               
+               
+                
+           
+              </div> 
+              
+                
+      
+            </mat-expansion-panel>
+          </div>
+    </div>
+  
+
+</div>

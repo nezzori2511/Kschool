@@ -1,0 +1,383 @@
+
+<!-- 
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>KShool</span>
+  
+    <div class="search-container">
+      <mat-form-field class="search-field">
+        <input matInput placeholder="Search...">
+      </mat-form-field>
+  
+      <button mat-icon-button class="search-button">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  
+    <button mat-icon-button>
+
+      <span class="material-symbols-outlined">
+        shopping_cart
+        </span>
+    </button>
+  
+    <button mat-icon-button>
+      <mat-icon>notifications</mat-icon>
+      <span class="notification">5</span>
+      <span class="d-lg-none d-md-block">Some Actions</span>
+    </button>
+  
+    <button mat-icon-button [matMenuTriggerFor]="accountMenu">
+        <mat-icon>person</mat-icon>
+        <span class="d-lg-none d-md-block">Account</span>
+
+        <span *ngIf="check_login()==false">User</span>
+        <span *ngIf="check_login()==true">{{user_name}}</span>
+      </button>
+      <mat-menu #accountMenu="matMenu">
+       <div *ngIf="check_login()==true">
+        <button mat-menu-item routerLink="/my-course">Thông tin khóa học</button>
+        <button mat-menu-item routerLink="/schedule-client">Lịch học </button>
+        <button mat-menu-item (click)="clear_login()" >Logout</button>
+       </div>
+       <div *ngIf="check_login()==false">
+        <button mat-menu-item routerLink="/login" >Đăng nhập</button>
+        
+       </div>
+      </mat-menu>
+  </mat-toolbar> 
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="sidenav">
+ 
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home">Trang chủ</a>
+        <a mat-list-item routerLink="">Lộ trình</a>
+        <a mat-list-item routerLink="">Khóa học</a>
+        <a mat-list-item routerLink="">Giới thiệu</a>
+       
+
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content class="sidenav-content">
+   
+      
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+<mat-toolbar color="primary" class="footer">
+    <span>&copy; 2023 Fullstack Academy</span>
+
+
+  </mat-toolbar>  -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>KSChool</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Free HTML Templates" name="keywords" />
+    <meta content="Free HTML Templates" name="description" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+ 
+    <link rel="stylesheet" href="/assets/bootstrap/lib/flaticon/font/_flaticon.scss" />
+    <link rel="stylesheet" href="/assets/bootstrap/lib/owlcarousel/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/assets/bootstrap/lib/lightbox/css/lightbox.min.css" />
+    <link rel="stylesheet" href="/assets/bootstrap/css/style.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Detail -->
+
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    rel="stylesheet"
+  />
+
+      <!-- Flaticon Font -->
+      <link href="/assets/bootstrap/lib/flaticon/font/flaticon.css"  />
+
+      <!-- Libraries Stylesheet -->
+      <link href="assets/bootstrap/lib/owlcarousel/assets/owl.carousel.min.css"  />
+      <link href="assets/bootstrap/lib/lightbox/css/lightbox.min.css"  />
+  </head>
+
+  <body>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+      <nav
+        class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5"
+      >
+        <a
+          href=""
+          class="navbar-brand font-weight-bold text-secondary"
+          style="font-size: 50px"
+        >
+          <i class="flaticon-043-teddy-bear"></i>
+          <span class="text-primary">KSCHOOL</span>
+        </a>
+        <button
+        style="background-color: #17a2b8;"
+          type="button"
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="navbarCollapse"
+        >
+          <div class="navbar-nav font-weight-bold mx-auto py-0">
+            <a href="/home" class="nav-item nav-link active">Trang chủ</a>
+            <a href="/course" class="nav-item nav-link">Các khóa học </a>
+            <!-- <a href="" class="nav-item nav-link">Lộ trình</a> -->
+            <a href="/teacher" class="nav-item nav-link">Giảng viên</a>
+            <!-- <a href="" class="nav-item nav-link">Gallery</a> -->
+            <div  *ngIf="check_login()==true" class="nav-item dropdown">
+            <a 
+                href="#"
+                class="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                style="font-weight: bold;"
+                >{{user_name}}</a>
+             
+            
+              <div   class="dropdown-menu rounded-0 m-0">
+                <a routerLink="/schedule-client"  class="dropdown-item">Lịch học </a>
+                <a (click)="clear_login()" class="dropdown-item">Đăng xuất</a>
+              </div>
+            </div>
+            
+
+            <div  *ngIf="check_login()==false" class="nav-item dropdown">
+              <a 
+                href="#"
+                class="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                style="font-weight: bold;"
+                >User</a>
+             
+            
+              <div  class="dropdown-menu rounded-0 m-0">
+                <a routerLink="/login" class="dropdown-item">Đăng nhập </a>
+              
+              </div>
+            </div>
+            
+            <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
+          </div>
+          <div *ngIf="check_login()==true">
+            <a href="/my-course" style="background-color: #17a2b8;border-color: #17a2b8;" class="btn btn-primary px-4" >Các khóa học đã đăng ký </a>
+          </div>
+          <div *ngIf="check_login()==false">
+            <a  class="btn btn-primary px-4" style="background-color: #17a2b8;border-color: #17a2b8;" href="/login" >Đăng nhập </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+   
+    <!-- Header End -->
+    <router-outlet></router-outlet>
+    <!-- Facilities Start -->
+    
+    <!-- Footer Start -->
+    <div
+      class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5"
+    >
+      <div class="row pt-5">
+        <div class="col-lg-3 col-md-6 mb-5">
+          <a
+            href=""
+            class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
+            style="font-size: 40px; line-height: 40px"
+          >
+            <i class="flaticon-043-teddy-bear"></i>
+            <span class="text-white">Kschool</span>
+          </a>
+          <p>
+            Labore dolor amet ipsum ea, erat sit ipsum duo eos. Volup amet ea
+            dolor et magna dolor, elitr rebum duo est sed diam elitr. Stet elitr
+            stet diam duo eos rebum ipsum diam ipsum elitr.
+          </p>
+          <div class="d-flex justify-content-start mt-4">
+            <a
+              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+              style="width: 38px; height: 38px"
+              href="#"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a
+              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+              style="width: 38px; height: 38px"
+              href="#"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+              style="width: 38px; height: 38px"
+              href="#"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a
+              class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+              style="width: 38px; height: 38px"
+              href="#"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+          <h3 class="text-primary mb-4">Get In Touch</h3>
+          <div class="d-flex">
+            <h4 class="fa fa-map-marker-alt text-primary"></h4>
+            <div class="pl-3">
+              <h5 class="text-white">Address</h5>
+              <p>123 Street, New York, USA</p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <h4 class="fa fa-envelope text-primary"></h4>
+            <div class="pl-3">
+              <h5 class="text-white">Email</h5>
+              <p>info@example.com</p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <h4 class="fa fa-phone-alt text-primary"></h4>
+            <div class="pl-3">
+              <h5 class="text-white">Phone</h5>
+              <p>+012 345 67890</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+          <h3 class="text-primary mb-4">Quick Links</h3>
+          <div class="d-flex flex-column justify-content-start">
+            <a class="text-white mb-2" href="#"
+              ><i class="fa fa-angle-right mr-2"></i>Home</a
+            >
+            <a class="text-white mb-2" href="#"
+              ><i class="fa fa-angle-right mr-2"></i>About Us</a
+            >
+            <a class="text-white mb-2" href="#"
+              ><i class="fa fa-angle-right mr-2"></i>Our Classes</a
+            >
+            <a class="text-white mb-2" href="#"
+              ><i class="fa fa-angle-right mr-2"></i>Our Teachers</a
+            >
+            <a class="text-white mb-2" href="#"
+              ><i class="fa fa-angle-right mr-2"></i>Our Blog</a
+            >
+            <a class="text-white" href="#"
+              ><i class="fa fa-angle-right mr-2"></i>Contact Us</a
+            >
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+          <h3 class="text-primary mb-4">Newsletter</h3>
+          <form action="">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control border-0 py-4"
+                placeholder="Your Name"
+                required="required"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control border-0 py-4"
+                placeholder="Your Email"
+                required="required"
+              />
+            </div>
+            <div>
+              <button
+              style="background-color: #17a2b8;"
+                class="btn btn-primary btn-block border-0 py-3"
+                type="submit"
+              >
+                Submit Now
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- <div
+        class="container-fluid pt-5"
+        style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;"
+      >
+        <p class="m-0 text-center text-white">
+          &copy;
+          <a class="text-primary font-weight-bold" href="#">Your Site Name</a>.
+          All Rights Reserved.
+
+       
+          Designed by
+          <a class="text-primary font-weight-bold" href="https://htmlcodex.com"
+            >HTML Codex</a
+          >
+          <br />Distributed By:
+          <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+        </p>
+      </div> -->
+    </div>
+    <!-- Footer End -->
+ 
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
+
+    <script type="text/javascript">
+      (function(d, m){
+          var kommunicateSettings = 
+              {"appId":"374cd64822d96e38656de77d41f735665","popupWidget":true,"automaticChatOpenOnNavigation":true};
+          var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+          s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+          var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+          window.kommunicate = m; m._globals = kommunicateSettings;
+      })(document, window.kommunicate || {});
+  /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+  </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/assets/bootstrap/lib/easing/easing.min.js"></script>
+    <script src="/src/assets/bootstrap/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/src/assets/bootstrap/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="/src/assets/bootstrap/lib/lightbox/js/lightbox.min.js"></script>
+
+    <script src="/src/assets/bootstrap/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/src/assets/bootstrap/mail/contact.js"></script>
+  
+    <script src="assets/bootstrap/js/main.js"></script>
+  </body>
+ 
+</html>

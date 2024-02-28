@@ -1,0 +1,347 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <!-- <form class="form-add" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div class="example-input-wrapper">
+    
+          <input hidden id="duration" value="1000" type="number" min="0" step="100" #duration>
+        </div>
+        
+        <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration.value">
+          <mat-step >
+           
+              <ng-template matStepLabel>Thông tin khóa học </ng-template>
+              <div class="information-course">
+                <mat-form-field class="name_course">
+                  <mat-label>Tên Khóa Học</mat-label>
+                  <input  matInput id="courseName" formControlName="courseName">
+                </mat-form-field>
+                </div>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            
+          </mat-step>
+          <mat-step >
+            
+              <ng-template matStepLabel>Giáo trình</ng-template>
+              <div formArrayName="chapters">
+                <div *ngFor="let chapter of chapters.controls; let i = index" [formGroup]="chapter">
+                  <div class="chapter-wrapper">
+                    <span class="chapter-number">{{ "Chương " + (i + 1) }}</span>
+                    
+                    <mat-form-field>
+                      
+                     
+                    <input matInput id="chapterName" formControlName="chapterName">
+                    </mat-form-field>
+                    <div class="form-button">
+                      <button mat-raised-button color="warn" type="button" (click)="removeChapter(i)">Xóa Chương</button>
+                      <button mat-raised-button color="primary" type="button" (click)="addLesson(chapter)">Thêm Bài Học</button>
+                    </div>
+                    
+                  </div>
+                  
+                  <div formArrayName="lessons">
+                    <div *ngFor="let lesson of chapter.get('lessons').controls; let j = index" [formGroupName]="j">
+                      <div class="lesson-wrapper" >
+                        <mat-form-field>
+                          <mat-label> Loại Bài Học</mat-label>
+                          <mat-select formControlName="lessonType">
+                            <mat-option value="video">Bài Học Video</mat-option>
+                            <mat-option value="quiz">Bài Tập Trắc Nghiệm</mat-option>
+                          </mat-select>
+                          
+                        </mat-form-field>
+                        
+                        
+                        
+                        
+                       
+                      <div *ngIf="lesson.get('lessonType').value === 'quiz'">
+                        <span class="lesson-number">{{ "Bài " + (j + 1) }}</span>
+                        <mat-form-field>
+                          <mat-label> Câu hỏi</mat-label>
+                          <input matInput id="question" formControlName="question">
+                        </mat-form-field>
+                        
+                        <mat-radio-group class="answer-group" formControlName="correct_answer">
+                        <mat-radio-button value="1">
+                          <mat-form-field>
+                            <mat-label> Đáp án 1</mat-label>
+                            <input matInput id="answer_1" formControlName="answer_1">
+                          </mat-form-field>
+                        </mat-radio-button>
+                        <mat-radio-button value="2">
+                          <mat-form-field>
+                            <mat-label> Đáp án 2</mat-label>
+                            <input matInput id="answer_2" formControlName="answer_2">
+                          </mat-form-field>
+                        </mat-radio-button>
+                        <mat-radio-button value="3">
+                          <mat-form-field>
+                            <mat-label> Đáp án 3</mat-label>
+                            <input matInput id="answer_3" formControlName="answer_3">
+                          </mat-form-field>
+                        </mat-radio-button>
+                        <mat-radio-button value="4">
+                          <mat-form-field>
+                            <mat-label>Đáp án 4</mat-label>
+                            <input matInput id="answer_4" formControlName="answer_4">
+                          </mat-form-field>
+                        </mat-radio-button>
+                      </mat-radio-group>
+                      
+                       
+                      </div>
+                      <div *ngIf="lesson.get('lessonType').value === 'video'">
+                        <span class="lesson-number">{{ "Bài " + (j + 1) }}</span>
+                        <mat-form-field >
+                          <mat-label> Tên Bài Học</mat-label>
+                          <input matInput id="lessonName" formControlName="lessonName">
+                          <br>
+                          <br>
+                          <input class="file-upload" type="file" matInput id="videoFile" formControlName="videoFile" (change)="onVideoChange($event,lesson)">
+                          
+          
+                        </mat-form-field>
+                      </div>
+                     
+                       
+                       
+                        
+                      <button mat-raised-button color="warn" type="button" (click)="removeLesson(i, j)">Xóa Bài Học</button>
+                      </div>
+                     
+                    </div>
+                  </div>
+                  
+                 
+                </div>
+                
+                <button (click)="addChapter()" mat-raised-button type="button"  >
+                  <i class="material-icons">add</i>
+              </button>
+              </div>
+              <div class="button-form">
+               
+                <button mat-raised-button color="primary" type="submit">Lưu</button>
+              </div>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+       
+       
+       
+      </form> -->
+
+
+      <div class="example-input-wrapper">
+    
+        <input hidden id="duration" value="1000" type="number" min="0" step="100" #duration>
+      </div>
+      <form class="form-add" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration.value">
+          <mat-step>
+            <ng-template matStepLabel>Thông tin khóa học </ng-template>
+            <div class="information-course">
+              <mat-form-field >
+                <mat-label>Tên Khóa Học</mat-label>
+                <input matInput id="courseName" formControlName="courseName">
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Mô tả</mat-label>
+                <textarea matInput id="describe" formControlName="describe" ></textarea>
+                
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Giá</mat-label>
+                <input type="text" matInput id="price" formControlName="price">
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Tổng slot</mat-label>
+                <input  type="text " matInput id="total_slot" formControlName="total_slot">
+              </mat-form-field>
+              
+                 <mat-form-field>
+                <mat-label>Lĩnh vực</mat-label>
+                <mat-select (selectionChange)="onSelectChangeSpecialized($event)"   >
+                  <mat-option [value]="null">Chọn lĩnh vực</mat-option>
+                  <ng-container *ngFor="let item of list_specialized">
+                    
+                    <mat-option  [value]="item.specialized_id" >
+                      {{ item.specialized_name  }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-form-field">
+                <mat-label>Thời gian mở đăng ký</mat-label>
+                <mat-date-range-input
+                  [formGroup]="campaignOne"
+                  [rangePicker]="campaignOnePicker"
+                  [comparisonStart]="campaignTwo.value.start"
+                  [comparisonEnd]="campaignTwo.value.end">
+                  <input matStartDate placeholder="Start date" formControlName="start">
+                  <input matEndDate placeholder="End date" formControlName="end">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+              </mat-form-field>
+              <mat-form-field class="example-form-field">
+                <mat-label>Ngày khai giảng</mat-label>
+                <input  formControlName="time_start_course" matInput [matDatepicker]="datepicker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+              <label >Ảnh đại diện</label>
+              <mat-form-field >
+                
+                <input  type="file" matInput id="image" formControlName="image" (change)="OnImageChange($event)" >
+              </mat-form-field>
+              
+            </div>
+       
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Chương và Bài Học</ng-template>
+            <div formArrayName="chapters">
+              <div *ngFor="let chapter of chapters.controls; let i = index" [formGroup]="chapter">
+                <div class="chapter-wrapper">
+                  <mat-form-field >
+                    <mat-label> Chương {{ i + 1 }}</mat-label>
+                    <input matInput formControlName="chapterName" >
+                  </mat-form-field>
+                  <div class="form-button">
+                    <button mat-raised-button color="warn" type="button" (click)="removeChapter(i)">Xóa Chương</button>
+                    <button mat-raised-button color="primary" type="button" (click)="addLesson(chapter)">Thêm Bài Học</button>
+                  </div>
+                </div>
+                <mat-expansion-panel hideToggle>
+                
+                  <mat-expansion-panel-header>
+                   
+                    <mat-panel-title>
+                      Nội dung Chương {{i+1}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                     
+                    </mat-panel-description>
+                  
+                  </mat-expansion-panel-header>
+                  <div formArrayName="lessons">
+                    <div *ngFor="let lesson of chapter.get('lessons').controls; let j = index" [formGroupName]="j">
+                     
+                    <div class="lesson-wrapper" >
+                      <mat-form-field>
+                        <mat-label> Loại Bài Học</mat-label>
+                        <mat-select formControlName="lessonType">
+                          <mat-option value="video">Bài Học Video</mat-option>
+                          <mat-option value="quiz">Bài Tập Trắc Nghiệm</mat-option>
+                        </mat-select>
+                        
+                      </mat-form-field>
+                      
+                      
+                      
+                      
+                     
+                    <div *ngIf="lesson.get('lessonType').value === 'quiz'">
+                      <span class="lesson-number">{{ "Bài " + (j + 1) }}</span>
+                      <mat-form-field>
+                        <mat-label> Câu hỏi</mat-label>
+                        <input matInput id="question" formControlName="question">
+                      </mat-form-field>
+                      
+                      <mat-radio-group class="answer-group" formControlName="correct_answer">
+                      <mat-radio-button value="1">
+                        <mat-form-field>
+                          <mat-label> Đáp án 1</mat-label>
+                          <input matInput id="answer_1" formControlName="answer_1">
+                        </mat-form-field>
+                      </mat-radio-button>
+                      <mat-radio-button value="2">
+                        <mat-form-field>
+                          <mat-label> Đáp án 2</mat-label>
+                          <input matInput id="answer_2" formControlName="answer_2">
+                        </mat-form-field>
+                      </mat-radio-button>
+                      <mat-radio-button value="3">
+                        <mat-form-field>
+                          <mat-label> Đáp án 3</mat-label>
+                          <input matInput id="answer_3" formControlName="answer_3">
+                        </mat-form-field>
+                      </mat-radio-button>
+                      <mat-radio-button value="4">
+                        <mat-form-field>
+                          <mat-label>Đáp án 4</mat-label>
+                          <input matInput id="answer_4" formControlName="answer_4">
+                        </mat-form-field>
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    
+                     
+                    </div>
+                    <div *ngIf="lesson.get('lessonType').value === 'video'">
+                      <span class="lesson-number">{{ "Bài " + (j + 1) }}</span>
+                      <mat-form-field >
+                        <mat-label> Tên Bài Học</mat-label>
+                        <input matInput id="lessonName" formControlName="lessonName">
+                        <br>
+                        <br>
+                        <input class="file-upload" type="file" matInput id="videoFile" formControlName="videoFile" (change)="onVideoChange($event,j+1,i+1)">
+                        
+        
+                      </mat-form-field>
+                    </div>
+                   
+                     
+                     
+                      
+                    <button mat-raised-button color="warn" type="button" (click)="removeLesson(i, j)">Xóa Bài Học</button>
+                    </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </div>
+              <div class="button-add-chapter">
+              <button (click)="addChapter()" mat-raised-button type="button">
+                <i class="material-icons">add</i>
+              </button>
+            </div>
+            </div>
+           
+           
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel> Xác nhận thêm khóa học</ng-template>
+           
+            <div>
+              <button  mat-button   type="submit">Save</button>
+              
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </form>
+    </div>
+  </div>
+  

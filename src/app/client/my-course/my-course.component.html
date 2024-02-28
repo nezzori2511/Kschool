@@ -1,0 +1,109 @@
+<!-- <div class="text-center">
+    <label style="font-size: 30px; color: black; position: relative;" for="">
+      <b>Các khóa học của tôi</b>
+      
+    </label>
+  </div>
+  <mat-grid-list  cols="4" rowHeight="500px" gutterSize="15px">
+   
+      <mat-grid-tile *ngFor="let courses of listMycourse" colspan="1" rowspan="1"   >
+        <mat-card class="example-card">
+          
+          <img style="border-radius: 15px;width: 320px;height: 200px;" mat-card-image [src]="courses.image">
+          <mat-card-header style="display: flex;justify-content: center;align-items: center;height: 100%;">
+           
+            <mat-card-title>
+              <h1><p>{{courses.name}}</p></h1>
+             
+            </mat-card-title>
+          
+          </mat-card-header>
+          <mat-card-content  style="font-size: 15px;">
+      
+          
+          </mat-card-content>
+          <mat-card-actions style="display: flex;justify-content: center;align-items: center;">
+            <button style=" display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid #3498db;
+            color: #3498db;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;"
+            onmouseover="this.style.backgroundColor='#3498db'; this.style.color='#ffffff';"
+            onmouseout="this.style.backgroundColor='initial'; this.style.color='#3498db';"
+            onmousedown="this.style.transform='scale(0.95)';"
+            onmouseup="this.style.transform='';" (click)="view_progress(courses)" >Vào khóa học</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+
+
+    
+  </mat-grid-list> -->
+
+   <!-- Header Start -->
+   <div class="container-fluid bg-primary mb-5">
+    <div
+      class="d-flex flex-column align-items-center justify-content-center"
+      style="min-height: 400px"
+    >
+      <h1 style="font-size: 40px;" class="display-3 font-weight-bold text-white">Khóa học của tôi</h1>
+      <div class="d-inline-flex text-white">
+        <p class="m-0"><a class="text-white" href="/home">Trang chủ</a></p>
+        <p class="m-0 px-2">/</p>
+        <p class="m-0">Khóa học của tôi</p>
+      </div>
+    </div>
+  </div>
+  <!-- Header End -->
+
+  <!-- Blog Start -->
+  <div class="container-fluid pt-5">
+    <div class="container">
+      <div class="text-center pb-2">
+        <p class="section-title px-5">
+          <span class="px-2">Khóa học của tôi </span>
+        </p>
+        <h1 class="mb-4"></h1>
+      </div>
+      <div class="row pb-3">
+        <div class="col-lg-4 mb-4" *ngFor="let courses of listMycourse" >
+          <div class="card border-0 shadow-sm mb-2">
+            <img style="height: 200px;width: 350px;" class="card-img-top mb-2" [src]="courses.image" alt="" />
+            <div class="card-body bg-light text-center p-4">
+              <h2 class=""><b>{{courses.name}}</b></h2>
+            
+              <a style="display: inline-block;
+              background-color:#ffffff;
+              padding: 10px 20px;
+              font-size: 16px;
+              font-weight: bold;
+              text-align: center;
+              text-decoration: none;
+              cursor: pointer;
+              border: 2px solid #3498db;
+              color: #3498db;
+              border-radius: 25px;
+              overflow: hidden;
+              position: relative;
+              transition: background-color 0.3s ease, color 0.3s ease;"
+              onmouseover="this.style.backgroundColor='#3498db'; this.style.color='#ffffff';"
+              onmouseout="this.style.backgroundColor='initial'; this.style.color='#3498db';"
+              onmousedown="this.style.transform='scale(0.95)';"
+              onmouseup="this.style.transform='';" (click)="view_progress(courses)" class="btn btn-primary px-4 mx-auto my-2"
+                >Bắt đầu học </a
+              >
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>

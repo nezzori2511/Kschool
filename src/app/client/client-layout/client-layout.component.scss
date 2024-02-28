@@ -1,0 +1,43 @@
+// mat-toolbar {
+//     margin-bottom: 20px;
+//   }
+
+// .search-container {
+//     display: flex;
+//     align-items: center;
+//     margin-left: auto; /* Đẩy nút search về phía bên phải */
+//   }
+  
+//   .search-field {
+//     width: 200px; /* Độ rộng của ô input */
+//   }
+  
+//   .search-button {
+//     margin-left: 8px; /* Khoảng cách giữa ô input và nút search */
+//   }
+
+//   .sidenav-container {
+//     height: 640px; /* Thay đổi giá trị này thành chiều rộng mong muốn */
+//   }
+
+//   .sidenav{
+    
+//     width: 300px;
+//   }
+
+//   /* Trong file style.css hoặc style.scss của bạn */
+// .footer {
+//   position: fixed;
+//   // bottom: 0;
+//   width: 100%;
+// }
+.nav-item.dropdown:hover .nav-link {
+
+  color: #17a2b8; /* Màu chữ khi hover */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi */
+}
+.dropdown-item:hover {
+  background-color: #17a2b8; /* Màu nền khi hover */
+  color: #fff; /* Màu chữ khi hover */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi */
+}

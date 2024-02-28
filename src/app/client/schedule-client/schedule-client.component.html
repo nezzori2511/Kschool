@@ -1,0 +1,35 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+      <!-- <button mat-raised-button color="primary" (click)="openAddEventDialog()">Thêm Sự Kiện</button> -->
+      <full-calendar
+      [options]="calendarOptions"
+      [events]="eventsPromise | async"
+      
+     (eventClick)="handleEventClick($event)"
+    ></full-calendar>
+
+    </div>
+  </div>
+
+  <ng-template #dialogTemplateScheduleForm >
+    <mat-card    class="edit-form-card">
+    <form  >
+    <mat-dialog-content class="mat-typography">
+      <h2 style="text-align: center;">Thông tin buổi học</h2>
+      <h3><b>Tên khóa học : </b>{{schedule_infor.name}}</h3>
+      <h3><b>Lĩnh vực : </b>{{schedule_infor.specialized_name}}</h3>
+      <h3><b>Phòng : </b>{{schedule_infor.room_name}}</h3>
+      <h3><b>Thời gian vào lớp: </b>{{schedule_infor.time_start}}</h3>
+        
+ 
+     
+      <div class="edit-form-buttons">
+       
+        <button mat-button color="warn" (click)="canclescheduleform()" >Cancel</button>
+      </div>
+    </mat-dialog-content>
+    </form>
+   
+  </mat-card>
+</ng-template>

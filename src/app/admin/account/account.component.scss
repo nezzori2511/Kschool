@@ -1,0 +1,13 @@
+table {
+    width: 100%;
+  }
+  .example-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .search-input {
+    width: 33%; /* Chiếm 1/3 của parent div */
+    margin-right: 16px; /* Khoảng cách giữa search input và các phần tử khác */
+  }

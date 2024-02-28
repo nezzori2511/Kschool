@@ -1,0 +1,98 @@
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .arrow-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: transparent;
+        color: black; // Màu sắc của nút
+        z-index: 1;
+      }
+      .left {
+        left: 10px; // Điều chỉnh vị trí của nút trái
+      }
+    
+      .right {
+        right: 10px; // Điều chỉnh vị trí của nút phải
+      }
+    img {
+    
+        padding: 15px;
+        width: 70%; // Tự động co dãn theo chiều rộng của container
+        display: flex;
+        justify-content: center; // Canh giữa theo chiều ngang
+        align-items: center; // Canh giữa theo chiều dọc
+        overflow: hidden;
+        //max-width: 600px;
+        border-radius:  35px;
+         // Tự động co dãn theo chiều rộng của thẻ card
+        height: 500px;
+        transition: opacity 0.5s ease; // Adjust the time to match your desired transition duration
+      }
+    &.transitioning img {
+        opacity: 0;
+      }
+      mat-card {
+        width: 100%; // Tự động co dãn theo chiều rộng của container
+        display: flex;
+        justify-content: center; // Canh giữa theo chiều ngang
+        align-items: center; // Canh giữa theo chiều dọc
+        overflow: hidden;
+        max-width: 600px; /* Thay đổi kích thước của thẻ card theo ý muốn */
+        transition: opacity 0.5s ease;
+      }
+
+  }
+  
+ 
+  // button {
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  // }
+
+  .example-card
+  {
+    border-radius: 15px;
+    
+  
+  }
+ 
+
+// .grid-title-course {
+//     margin: 10px; /* Thêm khoảng cách giữa các mat-grid-tile */
+//   }
+.text-center
+{
+  text-align: center;
+  
+  
+}
+
+// custom-button {
+//   display: inline-block;
+//   padding: 10px 20px;
+//   font-size: 16px;
+//   font-weight: bold;
+//   text-align: center;
+//   text-decoration: none;
+//   cursor: pointer;
+//   border: 2px solid #3498db;
+//   color: #3498db;
+//   border-radius: 5px;
+//   overflow: hidden;
+//   position: relative;
+//   transition: background-color 0.3s ease, color 0.3s ease;
+// }
+
+// .custom-button:hover {
+//   background-color: #3498db;
+//   color: #ffffff;
+// }
+
+// .custom-button:active {
+//   transform: scale(0.95);
+// }

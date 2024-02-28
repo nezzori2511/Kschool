@@ -1,0 +1,135 @@
+.main-content {
+  padding: 20px;
+  
+}
+
+.container-fluid {
+  max-width: 1000px;
+  margin: 0 auto;
+  
+}
+.form-add
+{
+  width: 1000px;
+  background-color: antiquewhite;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+
+button {
+  margin-right: 10px;
+}
+
+.file-upload {
+  margin-top: 10px;
+}
+
+/* Các hiệu ứng hover cho nút */
+button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+body {
+  background-color: #f4f4f4;
+}
+
+.main-content {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+button,
+input {
+  width: 150px; /* Điều chỉnh chiều dài của nút */
+}
+
+mat-form-field {
+  width: 100%; /* Điều chỉnh chiều dài của ô nhập liệu */
+  margin-bottom: 20px;
+}
+
+/* Hiệu ứng hover màu sắc cho nút */
+button:hover {
+  background-color: #4caf50; /* Màu sắc khi hover */
+  color: white; /* Màu chữ khi hover */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Thời gian và kiểu hiệu ứng */
+}
+
+
+.chapter-wrapper {
+  display: flex;
+  align-items: center;
+  
+   /* Độ giãn cách giữa các phần tử chương */
+  //background-color: #eaeaea;
+}
+.lesson-wrapper {
+  border-style:ridge ;
+  align-items: center;
+  margin-bottom: 20px; /* Độ giãn cách giữa các phần tử chương */
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom:10px ;
+  padding-right:0px ;
+  border-radius: 10px;
+  //background-color: #eaeaea;
+}
+
+
+.chapter-wrapper input {
+ 
+  margin-top: 10px; /* Khoảng cách từ trên xuống dưới */
+  flex: 0.8; /* Chiều dài của input tên chương sẽ mở rộng để lấp đầy phần còn lại của dòng */
+  margin-right: 10px; /* Khoảng cách giữa input và nút xóa chương */
+}
+.chapter-number {
+  width: 120px; /* Độ rộng của số chương */
+  text-align: right; /* Căn phải số chương */
+  margin-right: 20px; /* Khoảng cách giữa số chương và input tên chương */
+}
+.lesson-number {
+  width: 100px; /* Độ rộng của số chương */
+  text-align: right; /* Căn phải số chương */
+  margin-right: 20px; /* Khoảng cách giữa số chương và input tên chương */
+}
+
+.answer-group{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.lesson-wrapper {
+  padding: 10px;
+  margin-left: 20px; /* Điều chỉnh giá trị tùy theo khoảng cách bạn muốn lùi phần tử */
+  //background-color: #f5f5f5;
+}
+.button-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Điều chỉnh khoảng cách từ trên xuống dưới */
+}
+.information-course input{
+  font-size: 15px;
+}
+.form-button
+{
+  display:flex;
+  margin-left: 20px;
+}
+.button-add-chapter
+{
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
+  padding: 10px;
+}

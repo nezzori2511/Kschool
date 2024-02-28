@@ -1,0 +1,410 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Tasks:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link active" href="#profile" data-toggle="tab">
+                                            <i class="material-icons">group</i> Quản lý thông tin giảng viên
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#messages" data-toggle="tab">
+                                            <i class="material-icons">attach_money</i> Quản lý lương giảng viên 
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                            <i class="material-icons">sell</i> Quản lý chương trình giảm giá
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="profile">
+                                <!-- <div class="example-header">
+                                    <mat-form-field  class="search-input">
+                                      <input matInput  placeholder="Search">
+                                    </mat-form-field>
+                                         <mat-form-field class="search-input">
+                                      <mat-select  placeholder="Role">
+                                        <mat-option  [value]=0 >
+                                          All
+                                        </mat-option>
+                                       
+                                      </mat-select>
+                                    </mat-form-field>
+                                  
+                                  </div> -->
+                                  <button mat-raised-button type="button" (click)="openDialog(dialogTemplateAddTeacher)"   >
+                                    Thêm giảng viên
+                                 </button>
+                                <table #firstsort="matSort" matSort  mat-table [dataSource]="dataSource"  class="table">
+                                    
+                                    <ng-container matColumnDef="teacher_id">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Teacher id</th>
+                                      <td mat-cell *matCellDef="let teacher"> {{teacher.teacher_id}}</td>
+                                    </ng-container>
+                                
+                                
+                                    <ng-container matColumnDef="teacher_name">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
+                                      <td mat-cell *matCellDef="let teacher"> {{teacher.teacher_name}}</td>
+                                    </ng-container>
+                                
+                                    
+                                   
+                                    
+                                    
+                                    <ng-container matColumnDef="teacher_describe">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Giới thiệu </th>
+                                      <td mat-cell *matCellDef="let teacher"> {{teacher.teacher_describe}}</td>
+                                    </ng-container>
+                                  
+                                     
+                                      <ng-container matColumnDef="specialized_name">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Lĩnh vực</th>
+                                        <td mat-cell *matCellDef="let teacher"> {{teacher.specialized_name}}</td>
+                                      </ng-container>
+                                     
+                                    <ng-container matColumnDef="actions">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef>Actions</th>
+                                      <td mat-cell *matCellDef="let teacher">
+                                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="openDialog(dialogTemplateEditTeacher)" (click)="edit_teacher(teacher)"   >
+                                            <i class="material-icons">edit</i>
+                                          </button>
+                                          <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="delete_teacher(teacher)"  >
+                                              <i class="material-icons">close</i>
+                                          </button>
+                                        
+                                      
+                                      </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsCourseOpenning"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsCourseOpenning;"></tr>
+                                      </table>
+                                <mat-paginator #firstPaginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                            </div>
+                            <div class="tab-pane" id="messages">
+                                <div class="example-header">
+                                    <!-- <mat-form-field  class="search-input">
+                                      <input matInput  placeholder="Search">
+                                    </mat-form-field> -->
+                                         <!-- <mat-form-field class="search-input">
+                                      <mat-select (selectionChange)="onSelectCheck($event)">
+                                        <mat-option  [value]=0 >
+                                          Tháng này
+                                        </mat-option>
+                                        <mat-option  [value]=1 >
+                                            Tháng trước
+                                          </mat-option>
+                                      </mat-select>
+                                    </mat-form-field> -->
+                                    <div> <mat-form-field class="example-form-field">
+                                      <mat-label>Thời gian mở đăng ký</mat-label>
+                                      <mat-date-range-input onchange="fillter()" 
+                                        [formGroup]="campaignOne"
+                                        [rangePicker]="campaignOnePicker"
+                                        [comparisonStart]="campaignTwo.value.start"
+                                        [comparisonEnd]="campaignTwo.value.end">
+                                        <input matStartDate placeholder="Start date" formControlName="start">
+                                        <input matEndDate placeholder="End date" formControlName="end">
+                                      </mat-date-range-input>
+                                      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                      <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                                      <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                                     
+                                    </mat-form-field>
+                                    <button mat-raised-button type="button" (click)="filltersub()"     >
+                                      Fillter
+                                   </button>
+                                   <button mat-raised-button type="button"   (click)="allsub()" >
+                                    Hiện tất cả
+                                 </button>
+                                  </div>
+                                   
+                                   
+                                  </div>
+                                
+                                <table #secondsort="matSort" matSort  mat-table [dataSource]="dataSourceSalary"  class="table">
+                                    
+                                    <ng-container matColumnDef="teacher_id">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Teacher id</th>
+                                      <td mat-cell *matCellDef="let teacher_salary"> {{teacher_salary.teacher_id}}</td>
+                                    </ng-container>
+                                
+                                
+                                    <ng-container matColumnDef="teacher_name">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
+                                      <td mat-cell *matCellDef="let teacher_salary"> {{teacher_salary.teacher_name}}</td>
+                                    </ng-container>
+                                
+                                    
+                                   
+                                    
+                                    
+                                
+                                    <ng-container matColumnDef="lesson_count">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Tổng buổi đã dạy</th>
+                                        <td mat-cell *matCellDef="let teacher_salary"> {{teacher_salary.lesson_count}}</td>
+                                      </ng-container>
+                                     
+                                     
+                                      <ng-container matColumnDef="total_earning">
+                                        <th mat-sort-header mat-header-cell *matHeaderCellDef> Tổng lương tháng này</th>
+                                        <td mat-cell *matCellDef="let teacher_salary"> 
+                                            <div *ngIf="teacher_salary.total_earning==null">
+                                                0 VNĐ
+
+                                            </div>
+                                        <div *ngIf="teacher_salary.total_earning!=null">
+                                            {{teacher_salary.total_earning}} VNĐ
+                                        </div>
+                                        </td>
+                                      </ng-container>
+                                    <ng-container matColumnDef="actions">
+                                      <th mat-sort-header mat-header-cell *matHeaderCellDef>Actions</th>
+                                      <td mat-cell *matCellDef="let teacher_salary">
+                                        <button mat-raised-button type="button" (click)="openDialog(dialogTemplateTableSalary)"  (click)="detail(teacher_salary)"  >
+                                          Chi tiết
+                                       </button>
+                                        
+                                      
+                                      </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsSalaryTeacher"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsSalaryTeacher;"></tr>
+                                      </table>
+                                <mat-paginator #secondPaginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                             
+                            </div>
+                            <!-- <div class="tab-pane" id="settings">
+                            
+                                     
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    
+    </div>
+</div>
+<ng-template #dialogTemplateAddTeacher>
+    <mat-card  >
+    <form [formGroup]="addteacher_form" >
+      <h2 style="text-align: center;">Thêm giảng viên </h2>
+  
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label>First Name </mat-label>
+        <input matInput type="text"   formControlName="fisrt_name" required>
+        
+        
+        
+      </mat-form-field>
+     
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label>Last Name </mat-label>
+        <input matInput type="text"   formControlName="last_name" required>
+        
+        
+        
+      </mat-form-field>
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label> Email</mat-label>
+        <input matInput type="email"   formControlName="email" required>
+        
+        
+        
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Mô tả</mat-label>
+        <textarea  formControlName="teacher_describe" matInput placeholder="Mô tả"></textarea>
+      </mat-form-field>
+
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label>Số điện thoại </mat-label>
+        <input matInput type="number"   formControlName="phone_number" required>
+        
+        </mat-form-field>
+    
+ 
+
+      <mat-form-field>
+        <mat-label>Lĩnh vực</mat-label>
+        <mat-select (selectionChange)="onSelectChangeSpecialized($event)" [formControl]="addteacher_form.get('selectedOption')">
+          <mat-option [value]="null">Lĩnh vực</mat-option>
+          <ng-container *ngFor="let listspecailizeds of listspecailized">
+
+            <mat-option  [value]="listspecailizeds.specialized_id" >
+              {{ listspecailizeds.specialized_name  }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label> Username</mat-label>
+        <input matInput type="email"   formControlName="username" required>
+        
+        
+        
+      </mat-form-field>
+
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label> Password</mat-label>
+        <input matInput type="password"   formControlName="password1" required>
+        
+        
+        
+      </mat-form-field>
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label> Password</mat-label>
+        <input matInput type="password"   formControlName="password2" required>
+        
+        
+        
+      </mat-form-field>
+      <div class="edit-form-buttons">
+        <button mat-raised-button color="primary" type="submit"  (click)="addteacher_sub()" >Save</button>
+        <button mat-button color="warn" (click)="cancleaddteacher_form()">Cancel</button>
+      </div>
+      
+    </form>
+  </mat-card>
+  </ng-template>
+
+  <ng-template #dialogTemplateEditTeacher>
+    <mat-card  >
+    <form [formGroup]="editteacher_form" >
+      <h2 style="text-align: center;">Chỉnh sửa giảng viên </h2>
+  
+ 
+     
+
+
+
+    
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label>Tên giảng viên </mat-label>
+        <input matInput type="text"   formControlName="teacher_name" required>
+        <input matInput type="hidden"  formControlName="teacher_id" hidden>
+        
+        
+      </mat-form-field>
+      <mat-form-field  class="edit-form-field" appearance="fill">
+        <mat-label> Mô tả</mat-label>
+        <input matInput type="text"   formControlName="teacher_describe" required>
+        
+        
+        
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Lĩnh vực</mat-label>
+        <mat-select (selectionChange)="onSelectChangeSpecialized_edit($event)" [formControl]="editteacher_form.get('selectedOption')">
+          <mat-option [value]="null">Lĩnh vực</mat-option>
+          <ng-container *ngFor="let listspecailizeds of listspecailized">
+
+            <mat-option  [value]="listspecailizeds.specialized_id" >
+              {{ listspecailizeds.specialized_name  }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      
+     
+
+   
+      <div class="edit-form-buttons">
+        <button mat-raised-button color="primary" type="submit" (click)="subedit_teacher()"  >Save</button>
+        <button mat-button color="warn" (click)="cancleaddteacher_editform()">Cancel</button>
+      </div>
+      
+    </form>
+  </mat-card>
+  </ng-template>
+
+
+
+  <ng-template #dialogTemplateTableSalary>
+    <mat-card  >
+  
+      <h2 style="text-align: center;">Danh sách buổi dạy </h2>
+  
+      <table #thirdsort="matSort" matSort  mat-table [dataSource]="dataSourceTableSalary"  class="table">
+                                    
+        <ng-container matColumnDef="teacher_id">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Teacher id</th>
+          <td mat-cell *matCellDef="let teacher_salary_table"> {{teacher_salary_table.teacher_id}}</td>
+        </ng-container>
+    
+    
+        <ng-container matColumnDef="teacher_name">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let teacher_salary_table"> {{teacher_salary_table.teacher_name}}</td>
+        </ng-container>
+    
+        
+       
+        
+        <ng-container matColumnDef="name">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Tên khóa</th>
+          <td mat-cell *matCellDef="let teacher_salary_table"> {{teacher_salary_table.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="day_lesson">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef> Ngày dạy </th>
+          <td mat-cell *matCellDef="let teacher_salary_table"> {{teacher_salary_table.day_lesson}}</td>
+        </ng-container>
+      
+         
+          <ng-container matColumnDef="hourly_rate">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef> Tiền của buổi dạy</th>
+            <td mat-cell *matCellDef="let teacher_salary_table"> {{teacher_salary_table.hourly_rate}}</td>
+          </ng-container>
+      
+        <!-- <ng-container matColumnDef="actions">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let teacher_salary_table">
+            <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="openDialog(dialogTemplateEditTeacher)" (click)="edit_teacher(teacher)"   >
+                <i class="material-icons">edit</i>
+              </button>
+              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="delete_teacher(teacher)"  >
+                  <i class="material-icons">close</i>
+              </button>
+            
+          
+          </td>
+        </ng-container> -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTeacherSalaryTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTeacherSalaryTable;"></tr>
+          </table>
+    <mat-paginator #thirdPaginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+     
+
+
+
+
+      
+     
+
+   
+      <div class="edit-form-buttons">
+   
+        <button mat-button color="warn" (click)="cancletable_salary()">Cancel</button>
+      </div>
+      
+
+  </mat-card>
+  </ng-template>

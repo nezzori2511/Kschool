@@ -1,0 +1,20 @@
+.card
+{
+    
+    border: none;
+    width: 520px;
+    padding: 40px;
+    // position: absolute;
+    top :40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: hsla(205, 46%, 30%, 1);
+    background: linear-gradient(90deg,hsla(205,46%,30%,1)0%,hsla(260,29%,36%,1)100%)
+}
+h1 {
+    color: #fff;; /* Mã màu đỏ */
+}
+h6
+{
+    color: #fff;
+}

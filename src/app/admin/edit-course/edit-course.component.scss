@@ -1,0 +1,161 @@
+.main-content {
+    padding: 20px;
+    
+  }
+  
+  .container-fluid {
+    max-width: 1000px;
+    margin: 0 auto;
+    
+  }
+  .form-add
+  {
+    width: 1000px;
+    
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  
+  button {
+    margin-right: 10px;
+  }
+  
+  .file-upload {
+    margin-top: 10px;
+  }
+  
+  /* Các hiệu ứng hover cho nút */
+  button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+    }
+  }
+  body {
+    background-color: #f4f4f4;
+  }
+  
+  .main-content {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  
+  // mat-form-field {
+  //   width: 20%; /* Điều chỉnh chiều dài của ô nhập liệu */
+  //   margin-bottom: 20px;
+  // }
+  
+  /* Hiệu ứng hover màu sắc cho nút */
+  button:hover {
+    background-color: #4caf50; /* Màu sắc khi hover */
+    color: white; /* Màu chữ khi hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Thời gian và kiểu hiệu ứng */
+  }
+  
+  
+
+  .lesson-wrapper {
+    border-style:ridge ;
+    align-items: center;
+    margin-bottom: 20px; /* Độ giãn cách giữa các phần tử chương */
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom:10px ;
+    padding-right:0px ;
+    border-radius: 10px;
+    //background-color: #eaeaea;
+  }
+  
+  
+  
+  .lesson-number {
+    width: 100px; /* Độ rộng của số chương */
+    text-align: right; /* Căn phải số chương */
+    margin-right: 20px; /* Khoảng cách giữa số chương và input tên chương */
+  }
+  
+  .answer-group{
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .lesson-wrapper {
+    padding: 10px;
+    margin-left: 20px; /* Điều chỉnh giá trị tùy theo khoảng cách bạn muốn lùi phần tử */
+    //background-color: #f5f5f5;
+  }
+
+  .information-course input{
+    font-size: 15px;
+  }
+
+  .button-add-chapter
+  {
+   
+  }
+  .chapter-input {
+    width: calc(100% - 220px); /* Điều chỉnh chiều rộng của input tên chương */
+    margin-right: 10px; /* Khoảng cách giữa input và nút thêm chương */
+  }
+  .button-edit-course {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust this value to add spacing between the form and the button */
+  }
+  .content-chapter
+  {
+   
+    width: 100%;
+  }
+
+  .header-buttons {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+    align-items: center;
+    margin-left: 15px;
+    width: 10%;
+  }
+  
+  .header-buttons button {
+    white-space: nowrap; /* Prevent button text from wrapping */
+  }
+.title-lesson
+{
+  padding: 10px;
+}
+.title-lesson:hover
+{
+  background-color: #f4f4f4;
+}
+.chapter{
+  padding: 10px;
+}
+.example-card {
+  max-width: 400px;
+}
+
+.button-add-chapter {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 12px;
+}
+
+.chapter-input {
+  flex: 1; /* Sử dụng flex để input tự co giãn để đạt được chiều rộng mong muốn */
+  margin-right: 10px; /* Khoảng cách giữa input và nút thêm chương */
+}
